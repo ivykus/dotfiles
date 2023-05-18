@@ -453,7 +453,7 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
-                     opacity = 0.1,
+                     opacity = 0.95,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
@@ -512,7 +512,7 @@ client.connect_signal("manage", function (c)
     c.shape = function(cr, w, h)
         gears.shape.rounded_rect(cr, w, h, 10)
     end
-    opacity = 0.2
+    -- opacity = 0.8
     if awesome.startup
       and not c.size_hints.user_position
       and not c.size_hints.program_position then

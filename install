@@ -2,11 +2,17 @@
 BASEDIR=$(dirname $0)
 echo "basedir: ${BASEDIR}"
 cd $BASEDIR
+add_symlink() {
+    if [ ! -L ~/$1 ]; then
+        ln -s ${PWD}/$1 ~/$1
+    else
+        echo "link for $1 already exists"
+    fi
+}
 
-ln -s ${PWD}/.bashrc ~/.bashrc
-
-ln -s ${PWD}/.config/awesome ~/.config/awesome
-
-ln -s ${PWD}/.config/nvim ~/.config 
-
-ln -s ${PWD}/.config/alacritty ~/.config/alacritty
+add_symlink .bashrc
+add_symlink .config/awesome
+add_symlink .config/nvim
+add_symlink .config/alacritty
+add_symlink .config/picom
+add_symlink .xinitrc

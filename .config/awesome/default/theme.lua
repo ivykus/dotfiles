@@ -7,28 +7,32 @@ local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
 -- local gfs = require("gears.filesystem")
-local themes_path = os.getenv("HOME") .. "/.config/awesome/" 
+local themes_path = os.getenv("HOME") .. "/.config/awesome/"
 
 local theme = {}
 
-theme.font          = "Merriweather 10"
+theme.font_family = "Droid Sans "
+theme.font_family_mono = theme.font_family .. "Mono "
+theme.font = theme.font_family_mono .. "Regular 10"
 
-theme.bg_normal     = "#1E2326"
-theme.bg_focus      = "#272e33"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.text_color    = "#e0def4"
+
+theme.bg_normal     = "#191724"
+theme.bg_focus      = "#1f1d2e"
+theme.bg_urgent     = "#eb6f92"
+theme.bg_minimize   = "#403d52"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = theme.text_color
+theme.fg_focus      = theme.text_color
+theme.fg_urgent     = theme.text_color
+theme.fg_minimize   = theme.text_color
 
 theme.useless_gap   = dpi(6)
-theme.border_width  = dpi(3)
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
+theme.border_width  = dpi(0)
+theme.border_normal = theme.bg_normal
+theme.border_focus  = theme.bg_normal
+theme.border_marked = theme.bg_normal
 
 -- There are other variable sets
 -- overriding the default one when

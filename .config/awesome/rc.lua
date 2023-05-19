@@ -110,6 +110,8 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+local month_calendar = awful.widget.calendar_popup.month()
+month_calendar:attach( mytextclock, "tr" )
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -194,7 +196,51 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+
+        style    = {
+            shape_border_width = 0,
+            -- shape_border_color = '#777777',
+            shape  = gears.shape.rounded_bar,
+        },
+        layout   = {
+            spacing = 10,
+            -- spacing_widget = {
+            --     {
+            --         forced_width = 5,
+            --         shape        = gears.shape.circle,
+            --         widget       = wibox.widget.separator
+            --     },
+            --     valign = 'center',
+            --     halign = 'center',
+            --     widget = wibox.container.place,
+            -- },
+            layout  = wibox.layout.flex.horizontal
+        },
+        widget_template = {
+            {
+                {
+                    {
+                        {
+                            id     = 'icon_role',
+                            widget = wibox.widget.imagebox,
+                        },
+                        margins = 5,
+                        widget  = wibox.container.margin,
+                    },
+                    {
+                        id     = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left  = 10,
+                right = 10,
+                widget = wibox.container.margin
+            },
+            id     = 'background_role',
+            widget = wibox.container.background,
+        },
     }
 
     -- Create the wibox
@@ -202,8 +248,12 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Add widgets to the wibox
     s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
+        widget = wibox.container.margin,
+        left   = 12,
+        right  = 12,
+        {
+            layout = wibox.layout.align.horizontal,
+            { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             -- mylauncher,
             s.mytaglist,
@@ -211,12 +261,13 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
-            -- s.mylayoutbox,
-        },
+        layout = wibox.layout.fixed.horizontal,
+        mykeyboardlayout,
+        wibox.widget.systray(),
+        mytextclock,
+        -- s.mylayoutbox,
+    },
+}
     }
 end)
 -- }}}
@@ -496,6 +547,8 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = false }
     },
 
+    { rule = { class = "google-chrome-stable"},
+        properties = { opacity = 1} },
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },

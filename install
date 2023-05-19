@@ -18,3 +18,5 @@ add_symlink .config/nvim
 add_symlink .config/alacritty
 add_symlink .config/picom
 add_symlink .xinitrc
+add_symlink .tmux.conf
+add_symlink .p10k.zsh

@@ -10,6 +10,7 @@ add_symlink() {
     fi
 }
 
+add_symlink .zprofile
 add_symlink .bashrc
 add_symlink .config/awesome
 add_symlink .config/nvim

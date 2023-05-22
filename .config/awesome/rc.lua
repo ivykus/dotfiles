@@ -49,6 +49,7 @@ end
     beautiful.init(string.format("%s/.config/awesome/default/theme.lua",
                     os.getenv("HOME")))
 
+    beautiful.gap_single_client = false
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nano"
@@ -271,6 +272,21 @@ awful.screen.connect_for_each_screen(function(s)
     }
 end)
 -- }}}
+
+-- screen.connect_signal("arrange", function (s)
+--     local only_one = #s.tiled_clients == 1
+--     for _, c in pairs(s.clients) do
+--         if only_one and not c.floating or c.maximized or c.fullscreen then
+--             c.border_width = 0
+--             c.useless_gap = 0
+--         else
+--             c.border_width = beautiful.border_width
+--             c.useless_gap = beautiful.useless_gap
+--         end
+--     end
+-- end)
+
+
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
